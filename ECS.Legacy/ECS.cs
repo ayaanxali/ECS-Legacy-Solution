@@ -11,6 +11,7 @@
             SetThreshold(thr);
             _tempSensor = new TempSensor();
             _heater = new Heater();
+
         }
 
         public void Regulate()
