@@ -8,19 +8,22 @@ namespace TestLegacy
     {
         private int _threshold;
         public ECS.Legacy.ECS uut;
-        public ITempSensor tempSensor;
-        public IHeater heater;
-
+      //  public ITempSensor tempSensor;
+       // public IHeater heater;
+        public FakeHeater FakeHeater;
+        public FakeTempSensor FakeTempSensor;
         [SetUp]
         public void Setup()
         {
-            uut = new ECS.Legacy.ECS(_threshold, new FakeTempSensor(), new FakeHeater());
+            FakeHeater = new FakeHeater();
+            FakeTempSensor = new FakeTempSensor();
+            uut = new ECS.Legacy.ECS(_threshold, FakeTempSensor, FakeHeater);
         }
 
         [Test]
         public void Regulate_LowTemp_HeaterIsTurnedOn()
         {
-            tempSensor.ge
+            FakeTempSensor.GenereateTemp = 20;
             Assert.Pass();
         }
     }
@@ -78,12 +81,12 @@ namespace TestLegacy
     public class FakeTempSensor : ITempSensor
     {
         public bool IsActived { get; private set; }
-        public int genereateTemp { get; set; } 
+        public int GenereateTemp { get; set; } = 0; 
         public int GetTemp()
         {
             IsActived = true;
             
-            return genereateTemp;
+            return GenereateTemp;
 
         }
 
