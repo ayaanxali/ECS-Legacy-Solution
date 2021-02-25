@@ -24,7 +24,8 @@ namespace TestLegacy
         public void Regulate_LowTemp_HeaterIsTurnedOn()
         {
             FakeTempSensor.GenereateTemp = 20;
-            Assert.Pass();
+            uut.Regulate();
+            Assert.That(FakeHeater.HeaterIsOn, Is.EqualTo(1));
         }
     }
     /// <summary>
@@ -87,7 +88,6 @@ namespace TestLegacy
             IsActived = true;
             
             return GenereateTemp;
-
         }
 
         public bool RunSelfTest()
