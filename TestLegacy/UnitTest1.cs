@@ -1,15 +1,16 @@
 using System.Runtime.InteropServices.ComTypes;
 using NUnit.Framework;
 using ECS.Legacy;
+using NSubstitute;
 
 namespace TestLegacy
 {
     public class Tests
     {
-        private int _threshold;
+        private int _threshold = 23;
         public ECS.Legacy.ECS uut;
-      //  public ITempSensor tempSensor;
-       // public IHeater heater;
+       // public ITempSensor tempSensor;
+        public IHeater heater;
         public FakeHeater FakeHeater;
         public FakeTempSensor FakeTempSensor;
         [SetUp]
@@ -17,6 +18,8 @@ namespace TestLegacy
         {
             FakeHeater = new FakeHeater();
             FakeTempSensor = new FakeTempSensor();
+            //heater = Substitute.For<IHeater>();
+            //uut = new ECS.Legacy.ECS(_threshold, FakeTempSensor, heater);
             uut = new ECS.Legacy.ECS(_threshold, FakeTempSensor, FakeHeater);
         }
 
@@ -26,6 +29,29 @@ namespace TestLegacy
             FakeTempSensor.GenereateTemp = 20;
             uut.Regulate();
             Assert.That(FakeHeater.HeaterIsOn, Is.EqualTo(1));
+            //heater.Received(1).TurnOn();
+        }
+        [Test]
+        public void Regulate_HighTemp_HeaterIsTurnedOff()
+        {
+            FakeTempSensor.GenereateTemp = 27;
+            uut.Regulate();
+            Assert.That(FakeHeater.HeaterIsOff, Is.EqualTo(1));
+            //heater.Received(1).TurnOff();
+        }
+
+        [TestCase(true, true, true)]
+        [TestCase(true, false, false)]
+        [TestCase(false, false, false)]
+        [TestCase(false,true, false)]
+        public void RunSelfTest_CombinationOfInput_CorrectOutput(bool tempResult, bool heaterResult, bool expectedResult)
+        {
+            FakeTempSensor.SelfTestResult = tempResult;
+            FakeHeater.SelfTestResult = heaterResult;
+            //heater.RunSelfTest().Returns(heaterResult);
+
+            Assert.That(uut.RunSelfTest,Is.EqualTo(expectedResult));
+
         }
     }
     /// <summary>
@@ -82,7 +108,8 @@ namespace TestLegacy
     public class FakeTempSensor : ITempSensor
     {
         public bool IsActived { get; private set; }
-        public int GenereateTemp { get; set; } = 0; 
+        public int GenereateTemp { get; set; } = 0;
+        public bool SelfTestResult { get; set; }
         public int GetTemp()
         {
             IsActived = true;
@@ -94,17 +121,18 @@ namespace TestLegacy
         {
             IsActived = true;
 
-            return true; 
+            return SelfTestResult; 
         }
     }
 
     /// <summary>
-    /// Denne klasse er en fakeklasse af Heater klassen. 
+    /// Denne klasse er en fakeklasse af Heater klassen.
     /// </summary>
     public class FakeHeater : IHeater
     {
         public int HeaterIsOn { get; set; } = 0;
         public int HeaterIsOff { get; set; } = 0;
+        public bool SelfTestResult { get; set; }
 
         public void TurnOn()
         {
@@ -118,7 +146,7 @@ namespace TestLegacy
 
         public bool RunSelfTest()
         {
-            return true;
+            return SelfTestResult;
         }
     }
 }
