@@ -7,7 +7,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ECS.Legacy", "ECS.Legacy\EC
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{B5CABD59-540F-4FA8-B8A3-17B419172AE8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestLegacy", "TestLegacy\TestLegacy.csproj", "{449A426B-2B3F-45BC-A01F-397669A5787C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestLegacy", "TestLegacy\TestLegacy.csproj", "{449A426B-2B3F-45BC-A01F-397669A5787C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test.Legacy.Substitute", "Test.Legacy.Substitute\Test.Legacy.Substitute.csproj", "{D4DD3D37-F490-47A4-8EA8-4D50308B57E6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,6 +25,10 @@ Global
 		{449A426B-2B3F-45BC-A01F-397669A5787C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{449A426B-2B3F-45BC-A01F-397669A5787C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{449A426B-2B3F-45BC-A01F-397669A5787C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D4DD3D37-F490-47A4-8EA8-4D50308B57E6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D4DD3D37-F490-47A4-8EA8-4D50308B57E6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D4DD3D37-F490-47A4-8EA8-4D50308B57E6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D4DD3D37-F490-47A4-8EA8-4D50308B57E6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

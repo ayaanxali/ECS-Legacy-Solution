@@ -27,6 +27,7 @@ namespace TestLegacy
             uut.Regulate();
             Assert.That(FakeHeater.HeaterIsOn, Is.EqualTo(1));
         }
+        
     }
     /// <summary>
     /// Dette er en én til én klasse med ECS hvor vi kan styre dependencies: _threshold og har skiftet TempSensor og Heater klassen ud med vores egne fakes. 
