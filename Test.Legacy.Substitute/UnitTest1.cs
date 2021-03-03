@@ -13,6 +13,7 @@ namespace Test.Legacy.Substitute
         public IHeater heater;
         //public FakeHeater FakeHeater;
         public FakeTempSensor fakeTempSensor;
+
         [SetUp]
         public void Setup()
         {
