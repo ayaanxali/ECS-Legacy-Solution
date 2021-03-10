@@ -4,16 +4,31 @@ namespace ECS.Legacy
 {
     internal class TempSensor: ITempSensor
     {
-        private Random gen = new Random();
+        //private Random gen = new Random();
+        public event EventHandler<TempChangedEventArgs> TempChangedEvent;
 
-        public int GetTemp()
+        private int _oldTemp;
+        //public int GetTemp()
+        //{
+        //    return gen.Next(-5, 45);
+        //}
+
+        //public bool RunSelfTest()
+        //{
+        //    return true;
+        //}
+        public void setTemp(int newTemp)
         {
-            return gen.Next(-5, 45);
+            if (newTemp != _oldTemp)
+            {
+                OnTempChanged(new TempChangedEventArgs {Temp = newTemp});
+                _oldTemp = newTemp;
+            }
         }
 
-        public bool RunSelfTest()
+        protected virtual void OnTempChanged(TempChangedEventArgs e)
         {
-            return true;
+            TempChangedEvent?.Invoke(this,e);
         }
     }
 }

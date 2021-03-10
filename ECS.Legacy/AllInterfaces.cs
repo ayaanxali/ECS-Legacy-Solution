@@ -1,4 +1,6 @@
-﻿namespace ECS.Legacy
+﻿using System;
+
+namespace ECS.Legacy
 {
     public interface IECS
     {
@@ -18,7 +20,13 @@
 
     public interface ITempSensor
     {
-        int GetTemp();
-        bool RunSelfTest();
+       // int GetTemp();
+       // bool RunSelfTest();
+        event EventHandler<TempChangedEventArgs> TempChangedEvent;
+    }
+
+    public class TempChangedEventArgs : EventArgs
+    {
+        public int Temp { get; set; }
     }
 }
