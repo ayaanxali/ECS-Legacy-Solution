@@ -5,7 +5,7 @@ namespace ECS.Legacy
     public class ECS 
     {
         private int _threshold;
-        private readonly ITempSensor _tempSensor;
+        //private readonly ITempSensor _tempSensor;
         private readonly IHeater _heater;
         public int CurrentTemperature;
 
